@@ -1,11 +1,46 @@
+<section class="home-news" aria-labelledby="news-heading" markdown="0">
 
-<div class="well">
-<h4>News</h4>
-
-{% for article in site.data.news limit:9 %}
-<p>{{ article.date }}<br>{{ article.headline | markdownify}}</p>
-{% endfor %}
-
-<h4><a href="{{ site.url }}{{ site.baseurl }}/allnews.html">... see all News</a></h4>
-
+  <header class="news-section-header">
+    <div>
+      {% if include.archive %}
+      <h1 id="news-heading">News</h1>
+      {% else %}
+      <h2 id="news-heading">News</h2>
+      {% endif %}
     </div>
+  </header>
+
+  <div class="news-timeline">
+    {% assign news_limit = 5 %}
+    {% if include.archive %}
+      {% assign news_limit = site.data.news.size %}
+    {% endif %}
+    {% for article in site.data.news limit:news_limit %}
+    <article class="news-entry">
+
+      <span class="news-dot" aria-hidden="true"></span>
+
+      <div class="news-card">
+        <div class="news-date">
+          <i class="fa-regular fa-calendar"></i>
+          {{ article.date }}
+        </div>
+
+        <div class="news-description">
+          {{ article.headline | markdownify }}
+        </div>
+      </div>
+
+    </article>
+    {% endfor %}
+    {% unless include.archive %}
+    <div style="padding-top: 10px;">
+      <a href="{{ '/allnews.html' | relative_url }}" class="news-archive">
+        View all past events
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+    {% endunless %}
+  </div>
+
+</section>

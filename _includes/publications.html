@@ -1,0 +1,43 @@
+<section class="publications-section" aria-labelledby="publications-heading" markdown="0">
+  <header class="publications-header">
+    {% if include.archive %}
+    <h1 id="publications-heading">Publications</h1>
+    {% else %}
+    <h2 id="publications-heading">Publications</h2>
+    {% endif %}
+  </header>
+  {% for publication in site.data.publist %}
+  <article class="publication-entry">
+    <h3 class="publication-title">
+      {% if publication.paper_url and publication.paper_url != empty %}
+      <a href="{{ publication.paper_url | relative_url | escape }}">{{ publication.title | default: "Publication title" | escape }}</a>
+      {% else %}
+      {{ publication.title | default: "Publication title" | escape }}
+      {% endif %}
+    </h3>
+    <div class="publication-body">
+      {% if publication.image and publication.image != empty %}
+      <img class="publication-image" src="{{ publication.image | relative_url }}" alt="{{ publication.image_alt | default: publication.title | escape }}" loading="lazy">
+      {% else %}
+      <div class="publication-image publication-placeholder" aria-label="Publication image placeholder">Preview image</div>
+      {% endif %}
+      <div class="publication-details">
+        <div class="publication-description">{{ publication.description | default: "Add a short summary of your research and its main contribution." | markdownify }}</div>
+        <div class="publication-authors">{{ publication.authors | default: "Author names" | markdownify }}</div>
+        <p class="publication-venue">{{ publication.venue | default: "Conference or journal, year" | escape }}</p>
+        <div class="publication-links">
+          {% for link in publication.links %}
+          {% assign resource_url = link.url | default: '' | strip %}
+          {% if resource_url != empty %}
+          <a href="{{ resource_url | relative_url | escape }}">{{ link.name | escape }}</a>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+  {% unless include.archive %}
+  <a class="news-archive" href="{{ '/publications/' | relative_url }}">View all publications <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+  {% endunless %}
+</section>

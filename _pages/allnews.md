@@ -1,13 +1,9 @@
 ---
 title: "News"
 layout: textlay
-excerpt: "Allan Lab at Leiden University."
+excerpt: "News and past events from Lazar Đoković."
 sitemap: false
 permalink: /allnews.html
 ---
 
-# News
-
-{% for article in site.data.news %}
-<p>{{ article.date }} <br> {{ article.headline | markdownify}}</p>
-{% endfor %}
+{% include news.html archive=true %}

@@ -2,11 +2,84 @@
 layout: default
 ---
 
-  <div id="homeid" class="col-sm-8">
-        <h1>Welcome to the Allan Lab</h1>
+<div id="homeid" class="col-sm-8">
+  <div class="about-content">
+    {{ content }}
+  </div>
 
-	{{ content }}
+  {% include news.html %}
+</div>
+
+<div id="newsid" class="col-sm-4">
+
+  <img
+    src="{{ site.data.profile.photo | relative_url }}"
+    class="img-responsive profile-photo"
+    alt="{{ site.data.profile.name }}"
+  />
+
+  <div class="contact-card">
+    <h4>Contact</h4>
+
+    {% if site.data.profile.email %}
+    <a class="contact-link"
+      href="mailto:{{ site.data.profile.email }}">
+      <i class="fa-solid fa-envelope"></i>
+      <span>{{ site.data.profile.email }}</span>
+    </a>
+    {% endif %}
+
+    {% if site.data.profile.github %}
+    <a class="contact-link"
+      href="{{ site.data.profile.github }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="fa-brands fa-github"></i>
+      <span>{{ site.data.profile.github_name | default: "GitHub" }}</span>
+    </a>
+    {% endif %}
+
+    {% if site.data.profile.linkedin %}
+    <a class="contact-link"
+      href="{{ site.data.profile.linkedin }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="fa-brands fa-linkedin-in"></i>
+      <span>{{ site.data.profile.linkedin_name | default: "LinkedIn" }}</span>
+    </a>
+    {% endif %}
+
+    {% if site.data.profile.scholar %}
+    <a class="contact-link"
+      href="{{ site.data.profile.scholar }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>{{ site.data.profile.scholar_name | default: "Google Scholar" }}</span>
+    </a>
+    {% endif %}
+
+    {% if site.data.profile.orcid %}
+    <a class="contact-link"
+      href="{{ site.data.profile.orcid }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="fa-brands fa-orcid"></i>
+      <span>{{ site.data.profile.orcid_name | default: "ORCID" }}</span>
+    </a>
+    {% endif %}
+
+    {% if site.data.profile.cv %}
+    <a class="contact-link"
+      href="{{ site.data.profile.cv | relative_url }}"
+      target="_blank">
+      <i class="fa-solid fa-file-pdf"></i>
+      <span>Curriculum Vitae</span>
+    </a>
+    {% endif %}
   </div>
-  <div id="newsid" class="col-sm-4" >
-	{% include news.html %}
-  </div>
+
+</div>
+<div class="col-sm-12">
+  {% include publications.html %}
+</div>
