@@ -1,7 +1,7 @@
 ---
 title: "Lazar Đoković - Home"
 layout: homelay
-excerpt: "Personal academic website of Lazar Đoković."
+excerpt: "Personal website of Lazar Đoković."
 sitemap: false
 permalink: /
 ---
